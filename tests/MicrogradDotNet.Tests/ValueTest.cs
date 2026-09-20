@@ -182,4 +182,21 @@ public class ValueTest
         Assert.Equal(expectedData1, v1.Data);
         Assert.Equal(expectedData2, v2.Data);
     }
+    
+    [Fact]
+    public void Divide_Operation()
+    {
+        const double v1Data = 5.0;
+        const double v2Data = 2.0;
+        var v1 = new Value(v1Data);
+        var v2 = new Value(v2Data);
+        
+        const double expectedData = v1Data / v2Data;
+
+        var v = v1 / v2;
+        
+        Assert.Equal(expectedData, v.Data);
+        Assert.Equal(v1, v.Children[0]);
+        Assert.Equal(v2.Pow(-1.0).Data, v.Children[1].Data);
+    }
 }

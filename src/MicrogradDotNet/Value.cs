@@ -59,6 +59,9 @@ public class Value
     public static Value operator -(double left, Value right)
         => new Value(left) - right;
 
+    public static Value operator /(Value left, Value right)
+        => left * right.Pow(-1.0);
+
     public override string ToString()
         => $"Value(data={Data})";
 }

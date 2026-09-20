@@ -61,6 +61,12 @@ public class Value
     public Value Pow(double exponent)
     {
         var o = new Value(Math.Pow(Data, exponent), [this], $"^{exponent}");
+
+        o.BackwardAction = () =>
+        {
+            Grad += exponent * Math.Pow(Data, exponent - 1) * o.Grad;
+        };
+        
         return o;
     }
 

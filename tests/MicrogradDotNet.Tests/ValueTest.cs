@@ -248,4 +248,27 @@ public class ValueTest
         Assert.Equal(expectedOp, v1.Op);
         Assert.Equal(v, v1.Children[0]);
     }
+    
+    [Fact]
+    public void Relu_Operation()
+    {
+        const double v1Data = 5.0;
+        const double v2Data = -2.0;
+        var v1 = new Value(v1Data);
+        var v2 = new Value(v2Data);
+
+        var expectedData1 = Math.Max(0.0, v1Data);
+        var expectedData2 = Math.Max(0.0, v2Data);
+        const string expectedOp = "ReLU";
+
+        var v3 = v1.Relu();
+        var v4 = v2.Relu();
+        
+        Assert.Equal(expectedData1, v3.Data);
+        Assert.Equal(expectedData2, v4.Data);
+        Assert.Equal(expectedOp, v3.Op);
+        Assert.Equal(expectedOp, v4.Op);
+        Assert.Equal(v1, v3.Children[0]);
+        Assert.Equal(v2, v4.Children[0]);
+    }
 }

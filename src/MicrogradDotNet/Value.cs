@@ -81,6 +81,12 @@ public class Value
         return o;
     }
 
+    public Value Relu()
+    {
+        var o = new Value(Math.Max(0.0, Data), [this], "ReLU");
+        return o;
+    }
+
     public override string ToString()
         => $"Value(data={Data})";
 }

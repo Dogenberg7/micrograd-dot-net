@@ -47,6 +47,9 @@ public class Value
         return o;
     }
 
+    public static Value operator -(Value operand)
+        => operand * -1.0;
+
     public override string ToString()
         => $"Value(data={Data})";
 }

@@ -133,4 +133,19 @@ public class ValueTest
         Assert.Equal(expectedOp, v1.Op);
         Assert.Equal(v, v1.Children[0]);
     }
+
+    [Fact]
+    public void Negate_Operation()
+    {
+        const double vData = 5.0;
+        var v = new Value(vData);
+        
+        const double expectedData = -vData;
+
+        var v1 = -v;
+        
+        Assert.Equal(expectedData, v1.Data);
+        Assert.Equal(v, v1.Children[0]);
+        Assert.Equal(-1.0, v1.Children[1].Data);
+    }
 }

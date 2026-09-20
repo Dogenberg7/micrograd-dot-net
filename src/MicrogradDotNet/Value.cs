@@ -94,6 +94,12 @@ public class Value
     public Value Exp()
     {
         var o = new Value(Math.Exp(Data), [this], "exp");
+
+        o.BackwardAction = () =>
+        {
+            Grad += o.Data * o.Grad;
+        };
+        
         return o;
     }
 

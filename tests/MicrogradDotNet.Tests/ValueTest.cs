@@ -358,4 +358,21 @@ public class ValueTest
         
         Assert.Equal(expectedGrad1, v1.Grad);
     }
+    
+    [Fact]
+    public void Exp_Backward_AccumulatesGradients()
+    {
+        const double v1Data = 3.0;
+        const double vGrad = 5.0;
+        
+        var v1 = new Value(v1Data);
+        var v = v1.Exp();
+        
+        var expectedGrad1 = Math.Exp(v1Data) * vGrad;
+        
+        v.Grad = vGrad;
+        v.BackwardAction();
+        
+        Assert.Equal(expectedGrad1, v1.Grad);
+    }
 }

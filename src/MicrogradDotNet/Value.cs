@@ -23,6 +23,12 @@ public class Value
         return o;
     }
 
+    public static Value operator +(Value left, double right)
+        => left + new Value(right);
+    
+    public static Value operator +(double left, Value right)
+        => new Value(left) + right;
+
     public override string ToString()
         => $"Value(data={Data})";
 }

@@ -62,4 +62,20 @@ public class ValueTest
         Assert.Equal(v1, v.Children[0]);
         Assert.Equal(v2, v.Children[1]);
     }
+    
+    [Fact]
+    public void Add_ValueAndNotValue()
+    {
+        const double vData = 5.0;
+        const double d = 4.0;
+        var v = new Value(vData);
+
+        const double expectedData = 9.0;
+
+        var v1 = v + d;
+        var v2 = d + v;
+        
+        Assert.Equal(expectedData, v1.Data);
+        Assert.Equal(expectedData, v2.Data);
+    }
 }

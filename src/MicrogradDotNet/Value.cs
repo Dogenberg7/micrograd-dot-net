@@ -1,4 +1,6 @@
-﻿namespace MicrogradDotNet;
+﻿using System.Security.AccessControl;
+
+namespace MicrogradDotNet;
 
 public class Value
 {
@@ -9,6 +11,12 @@ public class Value
     {
         Data = data;
         Grad = 0.0;
+    }
+    
+    public static Value operator +(Value left, Value right)
+    {
+        var o = new Value(left.Data + right.Data);
+        return o;
     }
 
     public override string ToString()

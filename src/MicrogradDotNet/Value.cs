@@ -107,6 +107,12 @@ public class Value
     {
         var t = Math.Tanh(Data);
         var o = new Value(t, [this], "tanh");
+
+        o.BackwardAction = () =>
+        {
+            Grad += (1 - Math.Pow(t, 2)) * o.Grad;
+        };
+        
         return o;
     }
 

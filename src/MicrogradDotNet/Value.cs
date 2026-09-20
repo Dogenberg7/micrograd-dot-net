@@ -19,7 +19,7 @@ public class Value
     
     public static Value operator +(Value left, Value right)
     {
-        var o = new Value(left.Data + right.Data);
+        var o = new Value(left.Data + right.Data, [left, right], "+");
         return o;
     }
 

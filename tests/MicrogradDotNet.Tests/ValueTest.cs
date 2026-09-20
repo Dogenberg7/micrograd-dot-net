@@ -44,4 +44,22 @@ public class ValueTest
         Assert.Equal(v, v1.Children[0]);
         Assert.Equal(op, v1.Op);
     }
+    
+    [Fact]
+    public void Add_ChildrenTree()
+    {
+        const double v1Data = 4.0;
+        const double v2Data = 5.0;
+        
+        var v1 = new Value(v1Data);
+        var v2 = new Value(v2Data);
+        
+        const string expectedOp = "+";
+
+        var v = v1 + v2;
+        
+        Assert.Equal(expectedOp, v.Op);
+        Assert.Equal(v1, v.Children[0]);
+        Assert.Equal(v2, v.Children[1]);
+    }
 }

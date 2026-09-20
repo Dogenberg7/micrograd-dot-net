@@ -74,6 +74,13 @@ public class Value
         return o;
     }
 
+    public Value Tanh()
+    {
+        var t = Math.Tanh(Data);
+        var o = new Value(t, [this], "tanh");
+        return o;
+    }
+
     public override string ToString()
         => $"Value(data={Data})";
 }

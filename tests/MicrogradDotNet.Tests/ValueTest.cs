@@ -232,4 +232,20 @@ public class ValueTest
         Assert.Equal(expectedOp, v1.Op);
         Assert.Equal(v, v1.Children[0]);
     }
+    
+    [Fact]
+    public void Tanh_Operation()
+    {
+        const double vData = 5.0;
+        var v = new Value(vData);
+        
+        var expectedData = Math.Tanh(vData);
+        const string expectedOp = "tanh";
+
+        var v1 = v.Tanh();
+        
+        Assert.Equal(expectedData, v1.Data);
+        Assert.Equal(expectedOp, v1.Op);
+        Assert.Equal(v, v1.Children[0]);
+    }
 }

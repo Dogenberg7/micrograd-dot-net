@@ -148,4 +148,21 @@ public class ValueTest
         Assert.Equal(v, v1.Children[0]);
         Assert.Equal(-1.0, v1.Children[1].Data);
     }
+    
+    [Fact]
+    public void Subtract_Operation()
+    {
+        const double v1Data = 5.0;
+        const double v2Data = 7.0;
+        var v1 = new Value(v1Data);
+        var v2 = new Value(v2Data);
+        
+        const double expectedData = -2.0;
+
+        var v = v1 - v2;
+        
+        Assert.Equal(expectedData, v.Data);
+        Assert.Equal(v1, v.Children[0]);
+        Assert.Equal(-v2.Data, v.Children[1].Data);
+    }
 }

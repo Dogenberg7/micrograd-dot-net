@@ -50,6 +50,9 @@ public class Value
     public static Value operator -(Value operand)
         => operand * -1.0;
 
+    public static Value operator -(Value left, Value right)
+        => left + (-right);
+
     public override string ToString()
         => $"Value(data={Data})";
 }

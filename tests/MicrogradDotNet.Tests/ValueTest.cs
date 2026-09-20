@@ -409,4 +409,26 @@ public class ValueTest
         
         Assert.Equal(expectedGrad1, v1.Grad);
     }
+    
+    [Fact]
+    public void Backward_ComputesCorrectGradientsThroughGraph()
+    {
+        // f = (a + b) + c
+        var a = new Value(1.5);
+        var b = new Value(2.5);
+        var c = new Value(3.0);
+
+        var d = a + b;
+        var f = d + c;
+        
+        const double expectedGrad = 1.0;
+        
+        f.Backward();
+        
+        Assert.Equal(expectedGrad, c.Grad);
+        Assert.Equal(expectedGrad, a.Grad);
+        Assert.Equal(expectedGrad, d.Grad);
+        Assert.Equal(expectedGrad, f.Grad);
+        Assert.Equal(expectedGrad, b.Grad);
+    }
 }

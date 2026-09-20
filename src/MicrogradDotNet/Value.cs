@@ -1,6 +1,4 @@
-﻿using System.Security.AccessControl;
-
-namespace MicrogradDotNet;
+﻿namespace MicrogradDotNet;
 
 public class Value
 {
@@ -126,6 +124,33 @@ public class Value
         };
         
         return o;
+    }
+
+    public void Backward()
+    {
+        var topo = new List<Value>();
+        var visited = new HashSet<Value>();
+
+        void BuildTopo(Value v)
+        {
+            if (!visited.Contains(v))
+            {
+                visited.Add(v);
+                foreach (var child in v.Children)
+                {
+                    BuildTopo(child);
+                }
+                topo.Add(v);
+            }
+        }
+        
+        BuildTopo(this);
+        Grad = 1.0;
+
+        for (int i = topo.Count - 1; i >= 0; i--)
+        {
+            topo[i].BackwardAction();
+        }
     }
 
     public override string ToString()

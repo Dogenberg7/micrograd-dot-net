@@ -68,6 +68,12 @@ public class Value
     public static Value operator /(double left, Value right)
         => new Value(left) / right;
 
+    public Value Exp()
+    {
+        var o = new Value(Math.Exp(Data), [this], "exp");
+        return o;
+    }
+
     public override string ToString()
         => $"Value(data={Data})";
 }

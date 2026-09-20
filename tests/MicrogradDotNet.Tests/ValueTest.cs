@@ -216,4 +216,20 @@ public class ValueTest
         Assert.Equal(expectedData1, v1.Data);
         Assert.Equal(expectedData2, v2.Data);
     }
+    
+    [Fact]
+    public void Exp_Operation()
+    {
+        const double vData = 5.0;
+        var v = new Value(vData);
+        
+        var expectedData = Math.Exp(vData);
+        const string expectedOp = "exp";
+
+        var v1 = v.Exp();
+        
+        Assert.Equal(expectedData, v1.Data);
+        Assert.Equal(expectedOp, v1.Op);
+        Assert.Equal(v, v1.Children[0]);
+    }
 }

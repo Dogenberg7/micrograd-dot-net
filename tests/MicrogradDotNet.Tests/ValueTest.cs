@@ -116,4 +116,21 @@ public class ValueTest
         Assert.Equal(expectedData, v1.Data);
         Assert.Equal(expectedData, v2.Data);
     }
+    
+    [Fact]
+    public void Pow_Operation()
+    {
+        const double vData = 5.0;
+        const double exp = 2.0;
+        var v = new Value(vData);
+
+        var expectedData = Math.Pow(vData, exp);
+        var expectedOp = $"^{exp}";
+        
+        var v1 = v.Pow(exp);
+        
+        Assert.Equal(expectedData, v1.Data);
+        Assert.Equal(expectedOp, v1.Op);
+        Assert.Equal(v, v1.Children[0]);
+    }
 }

@@ -41,6 +41,12 @@ public class Value
     public static Value operator *(double left, Value right)
         => new Value(left) * right;
 
+    public Value Pow(double exponent)
+    {
+        var o = new Value(Math.Pow(Data, exponent), [this], $"^{exponent}");
+        return o;
+    }
+
     public override string ToString()
         => $"Value(data={Data})";
 }

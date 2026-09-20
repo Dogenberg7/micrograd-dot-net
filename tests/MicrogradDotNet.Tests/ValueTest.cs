@@ -165,4 +165,21 @@ public class ValueTest
         Assert.Equal(v1, v.Children[0]);
         Assert.Equal(-v2.Data, v.Children[1].Data);
     }
+    
+    [Fact]
+    public void Subtract_ValueAndNotValue()
+    {
+        const double vData = 5.0;
+        const double d = 4.0;
+        var v = new Value(vData);
+
+        const double expectedData1 = 1.0;
+        const double expectedData2 = -1.0;
+
+        var v1 = v - d;
+        var v2 = d - v;
+        
+        Assert.Equal(expectedData1, v1.Data);
+        Assert.Equal(expectedData2, v2.Data);
+    }
 }

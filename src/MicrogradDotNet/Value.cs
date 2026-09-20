@@ -42,6 +42,13 @@ public class Value
     public static Value operator *(Value left, Value right)
     {
         var o = new Value(left.Data * right.Data, [left, right], "*");
+        
+        o.BackwardAction = () =>
+        {
+            left.Grad += right.Data * o.Grad;
+            right.Grad += left.Data * o.Grad;
+        };
+        
         return o;
     }
     

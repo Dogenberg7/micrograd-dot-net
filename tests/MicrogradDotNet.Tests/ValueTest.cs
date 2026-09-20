@@ -303,4 +303,41 @@ public class ValueTest
         
         Assert.Equal(2*vGrad, v1.Grad);
     }
+    
+    [Fact]
+    public void Multiplication_Backward_AccumulatesGradients()
+    {
+        const double v1Data = 3.0;
+        const double v2Data = 2.0;
+        const double vGrad = 5.0;
+        
+        var v1 = new Value(v1Data);
+        var v2 = new Value(v2Data);
+        var v = v1 * v2;
+        
+        const double expectedGrad1 = v2Data * vGrad;
+        const double expectedGrad2 = v1Data * vGrad;
+        
+        v.Grad = vGrad;
+        v.BackwardAction();
+        
+        Assert.Equal(expectedGrad1, v1.Grad);
+        Assert.Equal(expectedGrad2, v2.Grad);
+    }
+    
+    [Fact]
+    public void Multiplication_Backward_AccumulatesWhenSameNodeIsReused()
+    {
+        const double v1Data = 3.0;
+        const double vGrad = 5.0;
+        var v1 = new Value(v1Data);
+        var v = v1 * v1;
+        
+        const double expectedGrad1 = 2 * v1Data * vGrad;
+
+        v.Grad = vGrad;
+        v.BackwardAction();
+        
+        Assert.Equal(expectedGrad1, v1.Grad);
+    }
 }

@@ -29,6 +29,12 @@ public class Value
     public static Value operator +(double left, Value right)
         => new Value(left) + right;
 
+    public static Value operator *(Value left, Value right)
+    {
+        var o = new Value(left.Data * right.Data, [left, right], "*");
+        return o;
+    }
+
     public override string ToString()
         => $"Value(data={Data})";
 }

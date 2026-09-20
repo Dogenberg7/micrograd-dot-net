@@ -78,4 +78,26 @@ public class ValueTest
         Assert.Equal(expectedData, v1.Data);
         Assert.Equal(expectedData, v2.Data);
     }
+    
+    [Fact]
+    public void Multiply_NewValue()
+    {
+        const double v1Data = 4.0;
+        const double v2Data = 5.0;
+        
+        var v1 = new Value(v1Data);
+        var v2 = new Value(v2Data);
+        
+        const double expectedData = v1Data * v2Data;
+        const string expectedOp = "*";
+
+        var v = v1 * v2;
+        
+        Assert.NotEqual(v1, v);
+        Assert.NotEqual(v2, v);
+        Assert.Equal(expectedData, v.Data);
+        Assert.Equal(expectedOp, v.Op);
+        Assert.Equal(v1, v.Children[0]);
+        Assert.Equal(v2, v.Children[1]);
+    }
 }

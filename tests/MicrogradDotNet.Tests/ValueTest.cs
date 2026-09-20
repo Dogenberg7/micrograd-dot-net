@@ -271,4 +271,36 @@ public class ValueTest
         Assert.Equal(v1, v3.Children[0]);
         Assert.Equal(v2, v4.Children[0]);
     }
+
+    [Fact]
+    public void Addition_Backward_AccumulatesGradients()
+    {
+        const double v1Data = 3.0;
+        const double v2Data = 2.0;
+        const double vGrad = 5.0;
+        
+        var v1 = new Value(v1Data);
+        var v2 = new Value(v2Data);
+        var v = v1 + v2;
+        
+        v.Grad = vGrad;
+        v.BackwardAction();
+        
+        Assert.Equal(vGrad, v1.Grad);
+        Assert.Equal(vGrad, v2.Grad);
+    }
+    
+    [Fact]
+    public void Addition_Backward_AccumulatesWhenSameNodeIsReused()
+    {
+        const double v1Data = 3.0;
+        const double vGrad = 5.0;
+        var v1 = new Value(v1Data);
+        var v = v1 + v1;
+
+        v.Grad = vGrad;
+        v.BackwardAction();
+        
+        Assert.Equal(2*vGrad, v1.Grad);
+    }
 }

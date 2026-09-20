@@ -8,6 +8,8 @@ public class Value
     public double Grad { get; set; }
     public Value[] Children { get; }
     public string Op { get; }
+    
+    public Action BackwardAction { get; set; }
 
     public Value(double data, Value[]? children = null, string op = "")
     {
@@ -15,11 +17,19 @@ public class Value
         Grad = 0.0;
         Children = children ?? [];
         Op = op;
+        BackwardAction = () => { };
     }
     
     public static Value operator +(Value left, Value right)
     {
         var o = new Value(left.Data + right.Data, [left, right], "+");
+        
+        o.BackwardAction = () =>
+        {
+            left.Grad += 1.0 * o.Grad;
+            right.Grad += 1.0 * o.Grad;
+        };
+        
         return o;
     }
 

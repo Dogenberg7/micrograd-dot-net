@@ -30,4 +30,18 @@ public class ValueTest
         Assert.NotEqual(v2, v);
         Assert.Equal(expectedData, v.Data);
     }
+
+    [Fact]
+    public void Constructor_ChildrenTree()
+    {
+        const double vData = 4.0;
+        const string op = "operation";
+        
+        var v = new Value(vData);
+
+        var v1 = new Value(v.Data, [v], op);
+        
+        Assert.Equal(v, v1.Children[0]);
+        Assert.Equal(op, v1.Op);
+    }
 }

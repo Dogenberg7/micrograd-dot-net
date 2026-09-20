@@ -6,11 +6,15 @@ public class Value
 {
     public double Data { get; set; }
     public double Grad { get; set; }
+    public Value[] Children { get; }
+    public string Op { get; }
 
-    public Value(double data)
+    public Value(double data, Value[]? children = null, string op = "")
     {
         Data = data;
         Grad = 0.0;
+        Children = children ?? [];
+        Op = op;
     }
     
     public static Value operator +(Value left, Value right)

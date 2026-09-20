@@ -392,4 +392,21 @@ public class ValueTest
         
         Assert.Equal(expectedGrad1, v1.Grad);
     }
+    
+    [Fact]
+    public void Relu_Backward_AccumulatesGradients()
+    {
+        const double v1Data = 3.0;
+        const double vGrad = 5.0;
+        
+        var v1 = new Value(v1Data);
+        var v = v1.Relu();
+        
+        var expectedGrad1 = (v.Data > 0 ? 1 : 0) * vGrad;
+        
+        v.Grad = vGrad;
+        v.BackwardAction();
+        
+        Assert.Equal(expectedGrad1, v1.Grad);
+    }
 }

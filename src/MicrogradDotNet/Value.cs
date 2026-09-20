@@ -119,6 +119,12 @@ public class Value
     public Value Relu()
     {
         var o = new Value(Math.Max(0.0, Data), [this], "ReLU");
+
+        o.BackwardAction = () =>
+        {
+            Grad += (o.Data > 0 ? 1 : 0) * o.Grad;
+        };
+        
         return o;
     }
 

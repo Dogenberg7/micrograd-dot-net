@@ -28,7 +28,7 @@ Developed with **Test-Driven Development (TDD)** using **xUnit**.
 ### Scalar Autograd Example
 
 ```csharp
-using MicrogradNet;
+using MicrogradDotNet;
 
 var a = new Value(-4.0);
 var b = new Value(2.0);

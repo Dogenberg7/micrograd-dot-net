@@ -17,4 +17,14 @@ public class Layer
         Neurons = neurons;
         Parameters = parameters;
     }
+
+    public IReadOnlyList<Value> Forward(IReadOnlyList<Value> inputs)
+    {
+        var outputs = new Value[Neurons.Count];
+        for (int i = 0; i < Neurons.Count; i++)
+        {
+            outputs[i] = Neurons[i].Forward(inputs);
+        }
+        return outputs;
+    }
 }

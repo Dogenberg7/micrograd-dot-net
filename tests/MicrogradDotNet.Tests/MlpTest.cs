@@ -49,6 +49,24 @@ public class MlpTest
         var res = mlp.Forward(inputs);
         
         Assert.Equal(expected, res[0].Data);
+    }
 
+    [Fact]
+    public void ZeroGrad_ZeroesParameterGrads()
+    {
+        const int numberOfInputs = 2;
+        int[] numbersOfOutputs = [2, 1];
+        Value[] inputs = [new Value(-120.0), new Value(2.0)];
+        
+        var mlp = new Mlp(numberOfInputs, numbersOfOutputs);
+        var res = mlp.Forward(inputs)[0];
+        
+        res.Backward();
+        mlp.ZeroGrad();
+
+        foreach (var p in mlp.Parameters)
+        {
+            Assert.Equal(0.0, p.Grad);
+        }
     }
 }

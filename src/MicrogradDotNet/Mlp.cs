@@ -30,6 +30,14 @@ public class Mlp
         return x;
     }
 
+    public void ZeroGrad()
+    {
+        foreach (var p in Parameters)
+        {
+            p.Grad = 0.0;
+        }
+    }
+
     public override string ToString()
     {
         return $"MLP[{string.Join(",", Layers)}])";

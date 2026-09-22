@@ -18,4 +18,9 @@ public class Mlp
         Layers = layers;
         Parameters = parameters;
     }
+
+    public override string ToString()
+    {
+        return $"MLP[{string.Join(",", Layers)}])";
+    }
 }

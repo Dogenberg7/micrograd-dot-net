@@ -19,6 +19,17 @@ public class Mlp
         Parameters = parameters;
     }
 
+    public IReadOnlyList<Value> Forward(IReadOnlyList<Value> inputs)
+    {
+        var x = inputs;
+        foreach (Layer l in Layers)
+        {
+            x = l.Forward(x);
+        }
+
+        return x;
+    }
+
     public override string ToString()
     {
         return $"MLP[{string.Join(",", Layers)}])";

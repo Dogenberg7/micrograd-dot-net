@@ -23,4 +23,15 @@ public class Neuron
         Weights = weights;
         Bias = new Value(0.0);
     }
+
+    public Value Forward(IReadOnlyList<Value> inputs)
+    {
+        Value act = Bias;
+        for (int i = 0; i < Weights.Count; i++)
+        {
+            act = act + Weights[i] * inputs[i];
+        }
+
+        return NonLinear ? act.Relu() : act;
+    }
 }

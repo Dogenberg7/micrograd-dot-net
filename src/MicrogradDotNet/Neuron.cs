@@ -37,4 +37,7 @@ public class Neuron
 
         return NonLinear ? act.Relu() : act;
     }
+
+    public override string ToString() 
+        => $"{(NonLinear ? "ReLU" : "Linear")}Neuron({Weights.Count})";
 }

@@ -26,6 +26,9 @@ public class Neuron
 
     public Value Forward(IReadOnlyList<Value> inputs)
     {
+        if(inputs.Count != Weights.Count)
+            throw new ArgumentException($"Expected {Weights.Count} inputs, but got {inputs.Count}");
+        
         Value act = Bias;
         for (int i = 0; i < Weights.Count; i++)
         {

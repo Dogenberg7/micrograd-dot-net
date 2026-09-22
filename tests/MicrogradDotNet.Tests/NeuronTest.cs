@@ -35,4 +35,13 @@ public class NeuronTest
         
         Assert.Equal(expected, output, precision: 5);
     }
+
+    [Fact]
+    public void Forward_ThrowsExceptionWhenInputSizeDoesNotMatchWeights()
+    {
+        var neuron = new Neuron(4);
+        Value[] inputs = [new Value(1.5), new Value(2.0), new Value(1.0)];
+        
+        Assert.Throws<ArgumentException>(() => neuron.Forward(inputs));
+    }
 }

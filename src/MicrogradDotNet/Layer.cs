@@ -27,4 +27,9 @@ public class Layer
         }
         return outputs;
     }
+
+    public override string ToString()
+    {
+        return $"Layer({string.Join(",", Neurons.Select(n => n.ToString()))})";
+    }
 }
